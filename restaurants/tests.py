@@ -30,7 +30,7 @@ class ModelTestCase(TestCase):
             price=1.750,
             restaurant=restaurant,
             )
-    
+
 
 class ViewTestCase(TestCase):
     def setUp(self):
@@ -91,7 +91,7 @@ class ViewTestCase(TestCase):
 
         self.restaurant_2 = Restaurant.objects.create(
             owner=self.user2,
-            name="Restaurant 2", 
+            name="Restaurant 2",
             description="This is Restaurant 2",
             opening_time="00:01:00",
             closing_time="23:59:00",
@@ -130,7 +130,7 @@ class ViewTestCase(TestCase):
             price=1.750,
             restaurant=self.restaurant_3,
             )
-        
+
         self.user_data_1 = {
             "username": "bob",
             "password": "adminadmin"
@@ -152,7 +152,7 @@ class ViewTestCase(TestCase):
         list_url = reverse("restaurant-list")
         response = self.client.get(list_url)
         for restaurant in Restaurant.objects.all():
-            self.assertIn(restaurant, response.context['restaurants'])
+            self.assertIn(restaurant, response.context['rest_list'])
             self.assertContains(response, restaurant.name)
             self.assertContains(response, restaurant.description)
             self.assertContains(response, restaurant.logo.url)
@@ -272,7 +272,7 @@ class ViewTestCase(TestCase):
 
     def test_signin_view(self):
         signin_url = reverse("signin")
-        
+
         response = self.client.get(signin_url)
         self.assertEqual(response.status_code, 200)
 
